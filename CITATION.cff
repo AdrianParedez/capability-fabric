@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use Capability Fabric, please cite it as below."
+title: Capability Fabric
+abstract: >-
+  A model-agnostic Agent Skills library for explicit routing, bounded context, and
+  verifiable agent behaviour. Built to the open Agent Skills standard.
+type: software
+authors:
+  - given-names: Adrian
+    family-names: Paredez
+version: 1.0.0
+date-released: "2026-06-05"
+license: Apache-2.0
+repository-code: "https://github.com/AdrianParedez/capability-fabric"
+url: "https://github.com/AdrianParedez/capability-fabric"
+keywords:
+  - agent-skills
+  - ai-agents
+  - context-engineering
+  - claude-code
+  - codex
+  - meta-skills

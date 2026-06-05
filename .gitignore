@@ -1,0 +1,63 @@
+# ── Capability Fabric ─────────────────────────────────────────────────────────
+# This repo is the source library. Ignore local tooling, OS cruft, and any runtime
+# artifacts the skills produce (ledgers, digests, benchmark logs) — not the skills.
+
+# Runtime artifacts produced BY the skills (sustained-execution / context-budgeting)
+notes/
+**/notes/
+*.ledger.md
+digest-*.md
+checkpoint-*.md
+
+# Benchmark run outputs / logs (the *methods* in benchmarks/ are tracked; results aren't)
+results/
+**/benchmarks/results/
+*.log
+*.bench.json
+*.run.csv
+
+# Local agent / editor state
+.claude/settings.local.json
+.claude/**/*.local.json
+.codex/
+.idea/
+.vscode/
+*.code-workspace
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# OS cruft
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Editor swap/backup
+*~
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# Python (skills may bundle scripts/)
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Node (optional tooling)
+node_modules/
+npm-debug.log*
+pnpm-debug.log*
+yarn-error.log*

@@ -1,0 +1,40 @@
+# ── Capability Fabric ─────────────────────────────────────────────────────────
+# Normalize line endings: this is a cross-platform, model-agnostic library. Skills
+# use forward-slash paths and must read identically on every runtime/OS.
+
+# Default: let Git normalize text and store LF in the repo.
+* text=auto eol=lf
+
+# Scripts that MUST be LF to run (CRLF breaks shebang/parsing).
+*.sh    text eol=lf
+*.ps1   text eol=lf
+*.bash  text eol=lf
+
+# Project content — always text.
+*.md    text eol=lf
+*.tpl   text eol=lf
+*.json  text eol=lf
+*.yaml  text eol=lf
+*.yml   text eol=lf
+*.txt   text eol=lf
+*.py    text eol=lf
+
+# Windows batch files, if ever added, need CRLF.
+*.bat   text eol=crlf
+*.cmd   text eol=crlf
+
+# Binary assets (skills/*/assets/) — never normalize or diff as text.
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.webp  binary
+*.pdf   binary
+*.ico   binary
+*.zip   binary
+*.gz    binary
+
+# Language stats / review hints (GitHub linguist).
+docs/**          linguist-documentation
+*.md             linguist-documentation
+skills/**/SKILL.md text
