@@ -7,7 +7,7 @@ notes for public milestones.
 
 ## [1.0.0] - 2026-06-05
 
-Planned public release tag: `v1.0.0`.
+Public release tag: `v1.0.0`.
 
 ### Added
 
@@ -26,7 +26,4 @@ Planned public release tag: `v1.0.0`.
 
 ## Unreleased
 
-### Planned
-
-- Public repository launch preparation.
-- Community issue and pull request workflow.
+No unreleased changes.
