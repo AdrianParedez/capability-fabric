@@ -1,0 +1,20 @@
+{
+  "name": "capability-fabric",
+  "owner": {
+    "name": "Adrian Paredez"
+  },
+  "metadata": {
+    "description": "A model-agnostic Agent Skills library for explicit routing, bounded context, and verifiable agent behaviour.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "capability-fabric",
+      "source": "./",
+      "description": "Install 10 Capability Fabric skills for explicit routing, bounded context, and verifiable agent behaviour.",
+      "version": "1.0.0",
+      "category": "productivity",
+      "keywords": ["skills", "meta", "context-engineering", "planning", "research", "autonomy", "routing"]
+    }
+  ]
+}

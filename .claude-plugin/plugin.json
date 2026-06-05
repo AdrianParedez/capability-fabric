@@ -1,0 +1,11 @@
+{
+  "name": "capability-fabric",
+  "version": "1.0.0",
+  "description": "A model-agnostic Agent Skills library for explicit routing, bounded context, and verifiable agent behaviour.",
+  "author": {
+    "name": "Adrian Paredez"
+  },
+  "license": "Apache-2.0",
+  "keywords": ["agent-skills", "skills", "routing", "context-engineering", "meta-skills"],
+  "skills": "./skills"
+}
