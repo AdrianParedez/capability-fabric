@@ -37,4 +37,5 @@
 # Language stats / review hints (GitHub linguist).
 docs/**          linguist-documentation
 *.md             linguist-documentation
+*.tpl            linguist-documentation
 skills/**/SKILL.md text
