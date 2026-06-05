@@ -5,6 +5,14 @@ All notable changes to Capability Fabric are recorded here.
 This project uses Conventional Commits for commit messages and version-oriented release
 notes for public milestones.
 
+## Unreleased
+
+### Changed
+
+- Adjusted GitHub Linguist attributes so template files do not appear as Go Template in
+  repository language statistics.
+- Updated public documentation to reflect the launched release and workflow surface.
+
 ## [1.0.0] - 2026-06-05
 
 Public release tag: `v1.0.0`.
@@ -23,7 +31,3 @@ Public release tag: `v1.0.0`.
 
 - All bundled skills pass `skills-ref validate`.
 - Installer syntax checks pass for PowerShell and Bash.
-
-## Unreleased
-
-No unreleased changes.

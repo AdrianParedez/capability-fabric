@@ -19,7 +19,7 @@ are the product. The research and design rationale live in `docs/`.
 - `install/install.ps1` and `install/install.sh` install or remove the skill library.
 - `install/routing-directive.md` is the routing block injected into agent configuration.
 - `.claude-plugin/` contains Claude Code plugin manifests.
-- `.github/` contains issue and pull request templates.
+- `.github/` contains workflows, issue templates, and the pull request template.
 - `.github/CONTRIBUTING.md`, `.github/SECURITY.md`, and `.github/CODE_OF_CONDUCT.md` are
   public governance files.
 - `docs/release/CHANGELOG.md` and `docs/release/ROADMAP.md` record release history and
@@ -100,6 +100,12 @@ $errors
 ```bash
 bash -n install/install.sh
 ```
+
+GitHub Actions:
+
+- `CI` runs on push, pull request, and manual dispatch.
+- `Link Check` runs on pull request Markdown changes and manual dispatch.
+- `Release Check` runs on manual dispatch before public releases.
 
 ## Before committing
 

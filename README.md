@@ -10,6 +10,7 @@ Explicit routes over accidental activation.
 <p>
   <a href="LICENSE"><img alt="License: Apache-2.0" src="https://img.shields.io/badge/license-Apache--2.0-blue"></a>
   <a href="docs/README.md"><img alt="Docs" src="https://img.shields.io/badge/docs-index-0078D4"></a>
+  <a href="https://github.com/AdrianParedez/capability-fabric/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/AdrianParedez/capability-fabric/actions/workflows/ci.yml/badge.svg"></a>
   <a href="https://agentskills.io"><img alt="Agent Skills standard" src="https://img.shields.io/badge/standard-Agent%20Skills-000000"></a>
   <img alt="Skills" src="https://img.shields.io/badge/skills-10-2ea44f">
   <img alt="Runtime" src="https://img.shields.io/badge/runtime-model--agnostic-0078D4">
@@ -93,8 +94,8 @@ Claude Code plugin install:
 /plugin install capability-fabric
 ```
 
-The plugin metadata is experimental until the public release path is finalized. The
-skills and installers are the supported distribution surface during preparation.
+The Claude Code plugin metadata is experimental. The skills and installers are the
+supported distribution surface for the public release.
 
 ## Documentation
 
@@ -194,6 +195,7 @@ Routing constraints:
 capability-fabric/
   .github/
     ISSUE_TEMPLATE/
+    workflows/
     CODE_OF_CONDUCT.md
     CONTRIBUTING.md
     pull_request_template.md
@@ -216,6 +218,9 @@ capability-fabric/
 ```
 
 ## Verification
+
+GitHub Actions runs `CI` on push and pull request. `Link Check` and `Release Check` are
+manual workflows for public documentation and release-readiness checks.
 
 Validate changed skills where the tool is available:
 
@@ -245,7 +250,7 @@ bash -n install/install.sh
 - Experimental library.
 - Runtime support depends on Agent Skills compatibility.
 - The installer writes to global agent configuration files.
-- Claude Code plugin metadata remains experimental until public release.
+- Claude Code plugin metadata remains experimental.
 - Benchmarks describe methods and targets, not published execution results.
 - Skills improve agent process, not domain expertise by themselves.
 

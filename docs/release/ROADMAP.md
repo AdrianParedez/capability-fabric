@@ -5,18 +5,18 @@ This roadmap describes the current lane, not a promise of dates.
 
 ## Current lane
 
-- Prepare the repository for public release.
+- Maintain the public `v1.0.0` baseline.
 - Keep the 10-skill core small, portable, and validated.
 - Preserve the tiered routing model and acyclic dependency graph.
 - Keep installers idempotent and reversible.
+- Keep the public repository surface quiet: source, docs, releases, and issue intake.
 
 ## Next
 
-- Publish the repository publicly once launch checks are complete.
-- Add CI for skill validation and installer syntax checks.
 - Add release packaging notes for plugin distribution.
 - Add examples showing multi-skill routing in realistic tasks.
 - Add a small compatibility matrix for supported agent runtimes.
+- Decide when Claude Code plugin distribution should move from experimental to supported.
 
 ## Later
 
