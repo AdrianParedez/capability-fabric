@@ -1,6 +1,6 @@
-# ── Capability Fabric ─────────────────────────────────────────────────────────
+# Capability Fabric
 # This repo is the source library. Ignore local tooling, OS cruft, and any runtime
-# artifacts the skills produce (ledgers, digests, benchmark logs) — not the skills.
+# artifacts the skills produce (ledgers, digests, benchmark logs) - not the skills.
 
 # Runtime artifacts produced BY the skills (sustained-execution / context-budgeting)
 notes/

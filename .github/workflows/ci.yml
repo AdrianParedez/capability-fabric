@@ -1,0 +1,174 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  repository-checks:
+    name: Repository checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Check public punctuation policy
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          blocked = {
+              "\u2013": "en dash",
+              "\u2014": "em dash",
+          }
+          failures = []
+
+          for path in sorted(Path(".").rglob("*")):
+              if ".git" in path.parts or not path.is_file():
+                  continue
+              try:
+                  text = path.read_text(encoding="utf-8")
+              except UnicodeDecodeError:
+                  continue
+              for index, char in enumerate(text):
+                  if char not in blocked:
+                      continue
+                  line = text.count("\n", 0, index) + 1
+                  column = index - text.rfind("\n", 0, index)
+                  failures.append(f"{path}:{line}:{column}: {blocked[char]}")
+
+          if failures:
+              print("Blocked punctuation found:")
+              print("\n".join(failures))
+              raise SystemExit(1)
+
+          print("Public punctuation policy passed.")
+          PY
+
+      - name: Validate skill structure
+        shell: bash
+        run: |
+          python - <<'PY'
+          import re
+          from pathlib import Path
+
+          root = Path("skills")
+          required_files = [
+              "SKILL.md",
+              "references.md",
+              "examples.md",
+              "benchmarks/README.md",
+          ]
+          required_dirs = [
+              "templates",
+              "checklists",
+          ]
+          failures = []
+          skill_dirs = sorted(path for path in root.iterdir() if path.is_dir())
+
+          if not skill_dirs:
+              failures.append("skills/: no skill directories found")
+
+          for skill_dir in skill_dirs:
+              for relative in required_files:
+                  if not (skill_dir / relative).is_file():
+                      failures.append(f"{skill_dir}: missing {relative}")
+
+              for relative in required_dirs:
+                  directory = skill_dir / relative
+                  if not directory.is_dir():
+                      failures.append(f"{skill_dir}: missing {relative}/")
+                  elif not any(directory.iterdir()):
+                      failures.append(f"{skill_dir}: empty {relative}/")
+
+              skill_file = skill_dir / "SKILL.md"
+              if not skill_file.is_file():
+                  continue
+
+              text = skill_file.read_text(encoding="utf-8").replace("\r\n", "\n")
+              if not text.startswith("---\n"):
+                  failures.append(f"{skill_file}: missing frontmatter")
+                  continue
+
+              try:
+                  frontmatter, body = text[4:].split("\n---\n", 1)
+              except ValueError:
+                  failures.append(f"{skill_file}: unclosed frontmatter")
+                  continue
+
+              metadata = {}
+              for line in frontmatter.splitlines():
+                  if line.startswith((" ", "\t")) or ":" not in line:
+                      continue
+                  key, value = line.split(":", 1)
+                  metadata[key.strip()] = value.strip().strip("'\"")
+
+              name = metadata.get("name", "")
+              description = metadata.get("description", "")
+
+              if name != skill_dir.name:
+                  failures.append(
+                      f"{skill_file}: name {name!r} does not match {skill_dir.name!r}"
+                  )
+              if len(name) > 64:
+                  failures.append(f"{skill_file}: name exceeds 64 characters")
+              if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", name):
+                  failures.append(f"{skill_file}: name is not lowercase hyphenated")
+              if not description:
+                  failures.append(f"{skill_file}: missing description")
+              if len(description) > 1024:
+                  failures.append(f"{skill_file}: description exceeds 1024 characters")
+              if len(body.splitlines()) > 500:
+                  failures.append(f"{skill_file}: body exceeds 500 lines")
+              if "## Runtime adaptation" not in body:
+                  failures.append(f"{skill_file}: missing Runtime adaptation section")
+
+          if failures:
+              print("Skill structure failures:")
+              print("\n".join(failures))
+              raise SystemExit(1)
+
+          print(f"Validated {len(skill_dirs)} skills.")
+          PY
+
+      - name: Validate plugin JSON
+        shell: bash
+        run: |
+          python -m json.tool .claude-plugin/plugin.json > /dev/null
+          python -m json.tool .claude-plugin/marketplace.json > /dev/null
+
+      - name: Check installer syntax
+        shell: bash
+        run: |
+          bash -n install/install.sh
+          pwsh -NoLogo -NoProfile -Command '
+            $tokens = $null
+            $errors = $null
+            [System.Management.Automation.Language.Parser]::ParseFile((Resolve-Path "install/install.ps1"), [ref] $tokens, [ref] $errors) | Out-Null
+            if ($errors.Count -gt 0) {
+              $errors | ForEach-Object { Write-Error $_ }
+              exit 1
+            }
+          '
+
+      - name: Run skills-ref when available
+        shell: bash
+        run: |
+          if ! command -v skills-ref > /dev/null 2>&1; then
+            echo "skills-ref is not installed on this runner; structural checks completed."
+            exit 0
+          fi
+
+          for skill in skills/*; do
+            if [ -d "$skill" ]; then
+              skills-ref validate "$skill"
+            fi
+          done

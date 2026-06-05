@@ -1,4 +1,4 @@
-# ── Capability Fabric ─────────────────────────────────────────────────────────
+# Capability Fabric
 # Normalize line endings: this is a cross-platform, model-agnostic library. Skills
 # use forward-slash paths and must read identically on every runtime/OS.
 
@@ -10,7 +10,7 @@
 *.ps1   text eol=lf
 *.bash  text eol=lf
 
-# Project content — always text.
+# Project content - always text.
 *.md    text eol=lf
 *.tpl   text eol=lf
 *.json  text eol=lf
@@ -23,7 +23,7 @@
 *.bat   text eol=crlf
 *.cmd   text eol=crlf
 
-# Binary assets (skills/*/assets/) — never normalize or diff as text.
+# Binary assets (skills/*/assets/) - never normalize or diff as text.
 *.png   binary
 *.jpg   binary
 *.jpeg  binary
