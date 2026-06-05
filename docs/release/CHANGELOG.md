@@ -7,6 +7,8 @@ notes for public milestones.
 
 ## [1.0.0] - 2026-06-05
 
+Planned public release tag: `v1.0.0`.
+
 ### Added
 
 - Initial Capability Fabric skill library with 10 agent-improving skills.
