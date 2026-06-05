@@ -2,8 +2,7 @@
 
 # Capability Fabric
 
-**A model-agnostic Agent Skills library built around explicit routing, bounded context,
-and verifiable agent behaviour.**
+**A model-agnostic Agent Skills library for explicit routing, bounded context, and verifiable agent behaviour.**
 
 Small skills over standing prompt weight. Composition over monolithic instructions.
 Explicit routes over accidental activation.
